@@ -43,7 +43,19 @@ public class TrainTracker {
 
             //parse JSON
             JSONObject jsonResponse = new JSONObject(response.toString());
+            JSONObject ctattObject = jsonResponse.getJSONObject("ctatt");
+            JSONArray route = ctattObject.getJSONArray("route");
 
+            for (int i = 0; i < route.length(); i++) {
+                JSONObject routeObject = route.getJSONObject(i);
+                JSONArray trains = routeObject.getJSONArray("train");
+
+                for (int j = 0; j < trains.length(); j++) {
+                    JSONObject trainObject = trains.getJSONObject(j);
+                    String nextStop = trainObject.getString("nextStaNm");
+                    System.out.println(nextStop);
+                }
+            }
         }
     }
 }
