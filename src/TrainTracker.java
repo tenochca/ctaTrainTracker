@@ -39,7 +39,6 @@ public class TrainTracker {
             }
             //closing the buffered reader
             in.close();
-            System.out.println(response.toString());
 
             //parse JSON
             JSONObject jsonResponse = new JSONObject(response.toString());
@@ -52,8 +51,16 @@ public class TrainTracker {
 
                 for (int j = 0; j < trains.length(); j++) {
                     JSONObject trainObject = trains.getJSONObject(j);
+                    String destination = trainObject.getString("destNm");
                     String nextStop = trainObject.getString("nextStaNm");
-                    System.out.println(nextStop);
+                    String arrivalTime = trainObject.getString("arrT");
+                    String isApproaching = trainObject.getString("isApp");
+                    if (isApproaching.equals("1")) {
+                        isApproaching = "Due now";
+                    } else {
+                        isApproaching = "Due at " + arrivalTime;
+                    }
+                    System.out.println(nextStop + " " + isApproaching);
                 }
             }
         }
