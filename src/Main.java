@@ -1,5 +1,6 @@
 import org.json.*;
 import java.io.*;
+import java.util.*;
 
 
 public class Main {
@@ -11,7 +12,10 @@ public class Main {
             "Ridgeland", "Oak Park", "Harlem/Lake"};
 
     public static void main(String[] args) throws JSONException, IOException {
-        TrainTracker.getResponse("Green Line");
+        ArrayList<Train> greenLineTrains = TrainTracker.getResponse("Green Line");
+        System.out.println(greenLineTrains.get(1).destination);
+
+
         Route.populateRoute(Main.greenLineCottageGrove);
         Route.print();
     }

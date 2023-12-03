@@ -1,8 +1,8 @@
 import org.json.*;
 import java.io.*;
 import java.net.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
 public class TrainTracker {
 
     static Map<String, String> trainRoute = new HashMap<>() {{
@@ -20,7 +20,7 @@ public class TrainTracker {
     public static final String BASE_URL = "https://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=";
     public static final String API_KEY = "57ab1165b4644d7a90321c937243a2b8";
 
-    public static void getResponse(String trainLine) throws IOException, JSONException {
+    public static ArrayList<Train> getResponse(String trainLine) throws IOException, JSONException {
         String API_URL = BASE_URL + API_KEY + "&outputType=JSON" + "&rt=" + trainRoute.get(trainLine);
 
         URL url = new URL(API_URL);
@@ -45,24 +45,29 @@ public class TrainTracker {
             JSONObject ctattObject = jsonResponse.getJSONObject("ctatt");
             JSONArray route = ctattObject.getJSONArray("route");
 
-            for (int i = 0; i < route.length(); i++) {
+            ArrayList<Train> trainList = new ArrayList<>(); //init array to get store trains
+
+            for (int i = 0; i < route.length(); i++) { //iterate through route array to get to train array
                 JSONObject routeObject = route.getJSONObject(i);
                 JSONArray trains = routeObject.getJSONArray("train");
 
-                for (int j = 0; j < trains.length(); j++) {
+                for (int j = 0; j < trains.length(); j++) { //for each train in the train array get the following attributes
                     JSONObject trainObject = trains.getJSONObject(j);
+                    String runNumber = trainObject.getString("rn");
                     String destination = trainObject.getString("destNm");
                     String nextStop = trainObject.getString("nextStaNm");
                     String arrivalTime = trainObject.getString("arrT");
                     String isApproaching = trainObject.getString("isApp");
-                    if (isApproaching.equals("1")) {
-                        isApproaching = "Due now";
-                    } else {
-                        isApproaching = "Due at " + arrivalTime;
-                    }
-                    System.out.println(nextStop + " " + isApproaching);
+                    Train newTrain = new Train(runNumber, nextStop, arrivalTime, destination);
+                    trainList.add(newTrain);
+                    System.out.println(nextStop + " " + isApproaching + "Run Number: " + runNumber);
                 }
             }
+            return trainList;
+        }
+        else {
+            System.out.println("FAILED CONNECTION");
+            return null;
         }
     }
 }

@@ -11,6 +11,4 @@ public class StationNode {
         this.next = null;
         this.run = null;
     }
-
-
 }
