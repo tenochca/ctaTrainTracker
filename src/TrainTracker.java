@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 public class TrainTracker {
 
-    static Map<String, String> trainRoute = new HashMap<>()  {{
+    static Map<String, String> trainRoute = new HashMap<>() {{
         put("Red Line", "Red");
         put("Blue Line", "Blue");
         put("Brown Line", "Brn");
@@ -66,3 +66,4 @@ public class TrainTracker {
         }
     }
 }
+

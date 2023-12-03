@@ -2,7 +2,6 @@ public class Route {
 
     static StationNode head;
     static StationNode tail;
-
     static int size = 0;
 
     public static void addLast(String name) {
@@ -12,10 +11,10 @@ public class Route {
             tail = newStation;
             size++;
         } else {
-            StationNode newStation = new StationNode(name); //create new node ln
-            newStation.prev = tail; //lns prev becomes the tail
-            tail.next = newStation; //ln becomes tails next
-            tail = newStation; //ln becomes tail
+            StationNode newStation = new StationNode(name);
+            newStation.prev = tail;
+            tail.next = newStation;
+            tail = newStation;
             size++; //increase the size
         }
     }
@@ -29,10 +28,9 @@ public class Route {
     public static void print() {
         StationNode walker = head; //create walker
         while (walker != null) { //while walker is not null
-            System.out.print(walker.name + " "); //print out walker.data
+            System.out.print(walker.name + "->");
             walker = walker.next; //update walker
         }
-
         System.out.println();
     }
 }
