@@ -28,9 +28,24 @@ public class Route {
     public static void print() {
         StationNode walker = head; //create walker
         while (walker != null) { //while walker is not null
-            System.out.print(walker.name + "->");
+            System.out.print(walker.name + " -> ");
+            if (walker.run != null && walker.run.isDue.equals("1")) {
+                System.out.print(" (Train Due: Run #" + walker.run.runNumber + " going to " + walker.run.destination + ")");
+            }
+            System.out.println(" ");
             walker = walker.next; //update walker
         }
         System.out.println();
+    }
+
+    public static StationNode getStationNode(String name) {
+        StationNode walker = head;
+        while (walker != null) {
+            if (walker.name.equals(name)) { //walk the list until we find the station
+                return walker; //return the station
+            }
+            walker = walker.next;
+        }
+        return null; //return null if no station with the name is found
     }
 }

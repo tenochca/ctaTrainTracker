@@ -13,10 +13,16 @@ public class Main {
 
     public static void main(String[] args) throws JSONException, IOException {
         ArrayList<Train> greenLineTrains = TrainTracker.getResponse("Green Line");
-        System.out.println(greenLineTrains.get(1).destination);
-
 
         Route.populateRoute(Main.greenLineCottageGrove);
+        //--------------------------------------------------------
+        for (Train train : greenLineTrains) {
+            StationNode station = Route.getStationNode(train.nextStop);
+            if (station != null) {
+                station.run = train;
+            }
+        }
+
         Route.print();
     }
 }
