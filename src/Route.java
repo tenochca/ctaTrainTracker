@@ -1,3 +1,7 @@
+import java.lang.reflect.*;
+import java.util.*;
+import java.time.LocalDateTime;
+
 public class Route {
 
     static StationNode head;
@@ -29,6 +33,9 @@ public class Route {
         StationNode walker = head; //create walker
         while (walker != null) { //while walker is not null
             System.out.print(walker.name + " -> ");
+            if (walker.run != null && walker.run.isDue.equals("0")) {
+                System.out.print(" (Run #" + walker.run.runNumber + " going to " + walker.run.destination + " arrives in " + Route.formatArrivalTime(walker) + " minutes)");
+            }
             if (walker.run != null && walker.run.isDue.equals("1")) {
                 System.out.print(" (Train Due: Run #" + walker.run.runNumber + " going to " + walker.run.destination + ")");
             }
@@ -47,5 +54,16 @@ public class Route {
             walker = walker.next;
         }
         return null; //return null if no station with the name is found
+    }
+
+    public static int formatArrivalTime(StationNode station) {
+        char x = station.run.arrivalTime.charAt(14);
+        char y = station.run.arrivalTime.charAt(15);
+        String minutesString = Character.toString(x) + Character.toString(y);
+        int minutes = Integer.parseInt(minutesString);
+
+        LocalDateTime currentTime = LocalDateTime.now();
+        int currentMinutes = currentTime.getMinute();
+        return minutes - currentMinutes;
     }
 }

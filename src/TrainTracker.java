@@ -60,7 +60,7 @@ public class TrainTracker {
                     String isApproaching = trainObject.getString("isApp");
                     Train newTrain = new Train(runNumber, nextStop, arrivalTime, isApproaching, destination);
                     trainList.add(newTrain);
-                    System.out.println(nextStop + " " + isApproaching + "Run Number: " + runNumber);
+                    System.out.println("Run Number: " + runNumber);
                 }
             }
             return trainList;
