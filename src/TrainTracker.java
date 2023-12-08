@@ -11,7 +11,7 @@ public class TrainTracker {
         put("Brown Line", "Brn");
         put("Green Line", "G");
         put("Orange Line", "Org");
-        put("Purple line", "P");
+        put("Purple Line", "P");
         put("Pink Line", "Pink");
         put("Skokie Swift", "Y");
     }};

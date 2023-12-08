@@ -30,6 +30,11 @@ public class Main {
             "California", "Western", "Damen", "18th", "Polk", "Ashland", "Morgan", "Clinton", "Clark/Lake", "State/Lake",
             "Washington/Wabash", "Adams/Wabash", "Adamns/Wabash", "Harold Washington Library-State/Van Buren", "LaSalle/Van Buren",
             "Quincy", "Washington/Wells"};
+    public static String[] purpleLine = new String[] {"Linden", "Central", "Noyes", "Foster", "Davis", "Dempster", "Main",
+            "South Blvd", "Howard", "Wilson", "Belmont", "Wellington", "Diversey", "Fullerton", "Armitage", "Sedgwick",
+            "Chicago", "Merchandise March", "Clark/lake", "State/Lake", "Washington/Wabash", "Adams/Wabash", "Adamns/Wabash",
+            "Harold Washington Library-State/Van Buren", "LaSalle/Van Buren", "Quincy", "Washington/Wells"};
+    public static String[] skokieSwift = new String[] {"Dempster-Skokie", "Oakton-Skokie", "Howard"};
 public static void printTrains(String input, String[] route) throws JSONException, IOException {
     ArrayList<Train> trains = TrainTracker.getResponse(input);
     Route.populateRoute(route);
@@ -47,6 +52,9 @@ public static void printTrains(String input, String[] route) throws JSONExceptio
             put("Red Line", redLine);
             put("Blue Line", blueLine);
             put("Brown Line", brownLine);
+            put("Pink Line", pinkLine);
+            put("Purple Line", purpleLine);
+            put("Skokie Swift", skokieSwift);
         }};
 
         Scanner scanner = new Scanner(System.in);
@@ -55,8 +63,11 @@ public static void printTrains(String input, String[] route) throws JSONExceptio
         trainLine = scanner.nextLine();
 
         if (trainLines.containsKey(trainLine)) {
-            printTrains(trainLine, trainLines.get(trainLine));
+            try {
+                printTrains(trainLine, trainLines.get(trainLine));
+            } catch (JSONException notrains) {
+                System.out.println("!!!Current Line has no train service!!!");
+            }
         }
-
     }
 }
