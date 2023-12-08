@@ -1,6 +1,5 @@
-import java.lang.reflect.*;
-import java.util.*;
 import java.time.LocalDateTime;
+import java.util.*;
 
 public class Route {
 
@@ -54,6 +53,15 @@ public class Route {
             walker = walker.next;
         }
         return null; //return null if no station with the name is found
+    }
+
+    public static void assignTrains(ArrayList<Train> trainList){
+        for (Train train : trainList) {
+            StationNode station = Route.getStationNode(train.nextStop);
+            if (station != null) {
+                station.run = train;
+            }
+        }
     }
 
     public static int formatArrivalTime(StationNode station) {

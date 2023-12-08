@@ -5,24 +5,58 @@ import java.util.*;
 
 public class Main {
 
-    public static String[] greenLineCottageGrove = new String[] {"Cottage Grove", "King Drive", "Ashland / 63rd",
+    public static String[] greenLineCottageGrove = new String[] {"Cottage Grove", "King Drive", "Ashland/63rd",
             "Halsted", "Garfield", "52st", "47th", "43rd", "Indiana", "35th-Bronzeville-IIT", "Cernak-McCormick Place",
             "Roosevelt", "Adams/Wabash", "Washington/Wabash", "State/Lake", "Clark/Lake", "Clinton", "Morgan", "Ashland",
             "California", "Kedzie", "Conservatory-Central Park Drive", "Pulaski", "Cicero", "Laramie", "Central", "Austin",
             "Ridgeland", "Oak Park", "Harlem/Lake"};
+    public static String[] orangeLine = new String[] {"Midway", "Pulaski", "Kedzie", "Western","35th/Archer",
+            "Ashland", "Halsted", "Roosevelt", "Harold Washington Library-State/Van Buren", "LaSalle/Van Buren",
+            "Quincy", "Washington/Wells", "Clark/lake", "State/lake", "Washington/Wabash", "Adams/Wabash"};
+    public static String[] redLine = new String[] {"95th/Dan Ryan", "87th", "79th", "69th", "63rd", "Garfield",
+            "47th", "Sox-35th", "Cermak-Chinatown", "Roosevelt", "Harrison", "Jackson", "Monroe", "Lake", "Grand",
+            "Chicago", "Clark/Division", "North/Clybourn", "Fullerton", "Belmont", "Addison", "Sheridan", "Wilson",
+            "Lawrence", "Argyle", "Berwyn", "Bryn Mawr", "Thorndale", "Granville", "Loyola", "Morse", "Jarvis", "Howard"};
+    public static String[] blueLine = new String[] {"Forest Park", "Harlem", "Oak Park", "Austin", "Cicero",
+            "Pulaski", "Kedzie-Homan", "Western (Forest Park Branch)", "Illinois Medical District", "Racine",
+            "UIC-Halsted", "Clinton", "LaSalle", "Jackson", "Monroe", "Washington", "Clark/Lake", "Grand", "Chicago",
+            "Division", "Damen", "Western (O'Hare Branch)", "California", "Logan Square", "Belmont", "Addison", "Irving Park",
+            "Montrose", "Jefferson Park", "Harlem", "Cumberland", "Rosemont", "O'Hare"};
+    public static String[] brownLine = new String[] {"Kimball", "Kedzie", "Francisco", "Rockwell", "Western", "Damen",
+            "Montrose", "Irving Park", "Addison", "Paulina", "Southport", "Belmont", "Wellington", "Diversey", "Fullerton",
+            "Armitage", "Sedgwick", "Chicago", "Merchandise Mart", "Washington/Wells", "LaSalle/Van Buren", "Harold Washington Library-State/Van Buren",
+            "Adams/Wabash", "Washington/Wabash", "State/Lake", "Clark/lake"};
+    public static String[] pinkLine = new String[] {"54th", "Cicero", "Kostner", "Pulaski", "Central Park", "Kedzie",
+            "California", "Western", "Damen", "18th", "Polk", "Ashland", "Morgan", "Clinton", "Clark/Lake", "State/Lake",
+            "Washington/Wabash", "Adams/Wabash", "Adamns/Wabash", "Harold Washington Library-State/Van Buren", "LaSalle/Van Buren",
+            "Quincy", "Washington/Wells"};
+public static void printTrains(String input, String[] route) throws JSONException, IOException {
+    ArrayList<Train> trains = TrainTracker.getResponse(input);
+    Route.populateRoute(route);
+    assert trains != null;
+    Route.assignTrains(trains);
+    Route.print();
+}
+
 
     public static void main(String[] args) throws JSONException, IOException {
-        ArrayList<Train> greenLineTrains = TrainTracker.getResponse("Green Line");
 
-        Route.populateRoute(Main.greenLineCottageGrove);
-        //--------------------------------------------------------
-        for (Train train : greenLineTrains) {
-            StationNode station = Route.getStationNode(train.nextStop);
-            if (station != null) {
-                station.run = train;
-            }
+        Map<String, String[]> trainLines = new HashMap<>() {{
+            put("Green Line", greenLineCottageGrove);
+            put("Orange Line", orangeLine);
+            put("Red Line", redLine);
+            put("Blue Line", blueLine);
+            put("Brown Line", brownLine);
+        }};
+
+        Scanner scanner = new Scanner(System.in);
+        String trainLine = null;
+        System.out.println("Choose a line: ");
+        trainLine = scanner.nextLine();
+
+        if (trainLines.containsKey(trainLine)) {
+            printTrains(trainLine, trainLines.get(trainLine));
         }
 
-        Route.print();
     }
 }
