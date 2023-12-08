@@ -62,6 +62,8 @@ public class TrainTracker {
                     trainList.add(newTrain);
                     System.out.println("Run Number: " + runNumber);
                 }
+                System.out.println(" ");
+                System.out.println("There are " + trainList.size() + " trains currently on this route\n ");
             }
             return trainList;
         }

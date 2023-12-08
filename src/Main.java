@@ -44,7 +44,7 @@ public static void printTrains(String input, String[] route) throws JSONExceptio
 }
 
 
-    public static void main(String[] args) throws JSONException, IOException {
+    public static void main(String[] args) throws IOException {
 
         Map<String, String[]> trainLines = new HashMap<>() {{
             put("Green Line", greenLineCottageGrove);
@@ -57,9 +57,25 @@ public static void printTrains(String input, String[] route) throws JSONExceptio
             put("Skokie Swift", skokieSwift);
         }};
 
+        System.out.println("""
+                Welcome to the cta Train Tracker :)
+                
+                Please choose from the following train lines:
+                >Green Line
+                >Orange Line
+                >Red Line
+                >Blue Line
+                >Brown Line
+                >Pink Line
+                >Purple Line
+                >Skokie Swift
+                
+               """);
+
+
         Scanner scanner = new Scanner(System.in);
-        String trainLine = null;
-        System.out.println("Choose a line: ");
+        String trainLine;
+        System.out.println("Enter here: ");
         trainLine = scanner.nextLine();
 
         if (trainLines.containsKey(trainLine)) {
