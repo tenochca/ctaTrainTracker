@@ -74,15 +74,27 @@ public static void printTrains(String input, String[] route) throws JSONExceptio
 
 
         Scanner scanner = new Scanner(System.in);
-        String trainLine;
-        System.out.println("Enter here: ");
-        trainLine = scanner.nextLine();
 
-        if (trainLines.containsKey(trainLine)) {
-            try {
-                printTrains(trainLine, trainLines.get(trainLine));
-            } catch (JSONException notrains) {
-                System.out.println("!!!Current Line has no train service!!!");
+        while (true) {
+
+            System.out.println("Enter here: ");
+            String trainLine = scanner.nextLine();
+
+            if (trainLines.containsKey(trainLine)) {
+                try {
+                    printTrains(trainLine, trainLines.get(trainLine));
+                } catch (JSONException noTrains) {
+                    System.out.println("!!!Current Line has no train service!!!");
+                }
+            } else {
+                System.out.println("!!!Invalid Line!!!\nPlease make sure to use the names shown above");
+            }
+
+            System.out.println("Would you like to pick another line? (yes/no): ");
+            String response = scanner.nextLine();
+
+            if (response.equalsIgnoreCase("no")) {
+                break;
             }
         }
     }
