@@ -55,9 +55,9 @@ public class Route {
         return null; //return null if no station with the name is found
     }
 
-    public static void assignTrains(ArrayList<Train> trainList){
+    public static void assignTrains(ArrayList<Train> trainList) {
         for (Train train : trainList) {
-            StationNode station = Route.getStationNode(train.nextStop);
+            StationNode station = getStationNode(train.nextStop);
             if (station != null) {
                 station.run = train;
             }

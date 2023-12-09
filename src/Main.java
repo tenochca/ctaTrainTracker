@@ -26,7 +26,7 @@ public class Main {
             "Montrose", "Irving Park", "Addison", "Paulina", "Southport", "Belmont", "Wellington", "Diversey", "Fullerton",
             "Armitage", "Sedgwick", "Chicago", "Merchandise Mart", "Washington/Wells", "LaSalle/Van Buren", "Harold Washington Library-State/Van Buren",
             "Adams/Wabash", "Washington/Wabash", "State/Lake", "Clark/lake"};
-    public static String[] pinkLine = new String[] {"54th", "Cicero", "Kostner", "Pulaski", "Central Park", "Kedzie",
+    public static String[] pinkLine = new String[] {"54th/Cermak", "Cicero", "Kostner", "Pulaski", "Central Park", "Kedzie",
             "California", "Western", "Damen", "18th", "Polk", "Ashland", "Morgan", "Clinton", "Clark/Lake", "State/Lake",
             "Washington/Wabash", "Adams/Wabash", "Adamns/Wabash", "Harold Washington Library-State/Van Buren", "LaSalle/Van Buren",
             "Quincy", "Washington/Wells"};
