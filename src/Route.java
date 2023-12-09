@@ -23,6 +23,7 @@ public class Route {
     }
 
     public static void populateRoute(String[] stationNames) {
+        clearRoute();
         for (String i : stationNames) { //iterate through array
             addLast(i); //add the stations to the route
         }
@@ -73,5 +74,11 @@ public class Route {
         LocalDateTime currentTime = LocalDateTime.now();
         int currentMinutes = currentTime.getMinute();
         return minutes - currentMinutes;
+    }
+
+    public static void clearRoute() {
+        head = null;
+        tail = null;
+        size = 0;
     }
 }
