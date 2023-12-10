@@ -44,7 +44,7 @@ public static void printTrains(String input, String[] route) throws JSONExceptio
 }
 
 
-    public static void main(String[] args) throws IOException, JSONException {
+    public static void main(String[] args) throws IOException {
 
         Map<String, String[]> trainLines = new HashMap<>() {{
             put("Green Line", greenLineCottageGrove);
@@ -74,11 +74,10 @@ public static void printTrains(String input, String[] route) throws JSONExceptio
 
 
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter here: ");
+        String trainLine = scanner.nextLine();
 
         while (true) {
-
-            System.out.println("Enter here: ");
-            String trainLine = scanner.nextLine();
 
             if (trainLines.containsKey(trainLine)) {
                 try {
@@ -100,19 +99,16 @@ public static void printTrains(String input, String[] route) throws JSONExceptio
                     """);
             String response = scanner.nextLine();
 
-            if (response.equalsIgnoreCase("3")) {
-                break;
+            if (response.equalsIgnoreCase("1")) {
+                System.out.println("Enter new line: ");
+                trainLine = scanner.nextLine();
+
             }
             else if(response.equalsIgnoreCase("2")) {
-                printTrains(trainLine, trainLines.get((trainLine)));
-                System.out.println("""
-                    Choose from the following:
-                    <1> SELECT NEW LINE
-                    <2> REFRESH CURRENT LINE
-                    <3> EXIT PROGRAM
-                    
-                    Please enter the corresponding number:
-                    """);
+                assert true;
+
+            } else {
+                break;
             }
         }
     }
